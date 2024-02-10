@@ -8,19 +8,33 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
 function searchNgo(query) {
     // Get all NGO cards
-    const ngoCards = document.querySelectorAll(".ngo"); //class ka name h: .ngo --> pura card including name , description , images sb dikhana h so vo har particular card ka div h usko hum store kr rhe ngoCards me
+    const ngoCards = document.querySelectorAll(".ngo");
+    const container = document.getElementById("ngoContainer"); //this is the main container in which we are showing all the cards dynamically , after searchng , only matched card will be shown here
+    const existingMessage = container.querySelector(".no-data-message");
+    if (existingMessage) {
+        container.removeChild(existingMessage);
+    }
+
+    let dataFound = false; // to track if data is found or nott
 
     // Loop through each card and check if the name matches the search query
     ngoCards.forEach(card => {
         const name = card.querySelector("h3").textContent.toLowerCase();
         if (name.includes(query)) {
-            card.style.display = "block"; // Show the card if it matches
+            card.style.display = "block"; 
+            dataFound = true; // Set flag to true
         } else {
-            // alert('no results found for given search')
             card.style.display = "none"; // Hide the card if it doesn't match
         }
     });
+
+    //display message if no data is found
+    if (!dataFound) {
+        const noDataMessage = document.createElement('h3');
+        noDataMessage.innerText = 'No data found';
+        noDataMessage.classList.add('no-data-message'); 
+        container.appendChild(noDataMessage); 
+    }
 }
