@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', function () {
-  // Retrieve NGO cards from localStorage
+  // retriving the cards from the local storage using getItem 
   const ngoCards = JSON.parse(localStorage.getItem('ngoCards')) || [];
 
-  // Select the container where NGO cards will be displayed
-  const ngoCardsContainer = document.getElementById('ngo-cards-container');
+  
+  const ngoCardsContainer = document.getElementById('ngo-cards-container'); // container for displaying ngoCards
 
   // Loop through each NGO card and create HTML elements to display them
   ngoCards.forEach(function (ngoCard) {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const cardImage = document.createElement('img');
     cardImage.classList.add('card-img-top');
-    cardImage.src = 'https://vakilsearch.com/blog/wp-content/uploads/2021/05/VS_Blog-Images_3-05.png';
+    cardImage.src = ngoCard.imageUrl;
     cardImage.alt = 'NGO Image';
 
     const cardBody = document.createElement('div');
@@ -78,6 +78,8 @@ const userLogout = document.getElementById('userLogout');
 const ngoLoginBtn = document.getElementById('ngoLoginBtn');
 const ngoSignupBtn = document.getElementById('ngoSignupBtn');
 const ngoLogoutBtn = document.getElementById('ngoLogout')
+const adminLoginBtn = document.getElementById('adminLoginBtn')
+const adminPageBtn = document.getElementById('adminPageBtn')
 
 if(localStorage.getItem('isUserLoggedIn') === 'YES') {
   userLogin.style.display = 'none'
@@ -100,6 +102,15 @@ else {
   ngoLoginBtn.style.display = 'block';
   ngoSignupBtn.style.display = 'block'
   ngoLogoutBtn.style.display = 'none';
+}
+if(localStorage.getItem('isAdminLoggedIn') === 'YES') {
+  adminLoginBtn.style.display = 'none';
+  adminPageBtn.style.display = 'block';
+  userLogout.style.display = 'block'
+}
+else {
+  adminLoginBtn.style.display = 'block';
+  adminPageBtn.style.display = 'none';
 }
 
 

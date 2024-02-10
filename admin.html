@@ -6,6 +6,13 @@
   <title>Admin Panel</title>
 </head>
 <body>
+  <style>
+    .card img{
+      max-width: 100%; 
+      max-height: 200px;
+      object-fit: cover;
+    }
+  </style>
   <h1>Admin Panel</h1>
 
   <!-- Form to add NGO cards -->
@@ -17,6 +24,9 @@
     <label for="ngo-description">NGO Description:</label><br>
     <textarea id="ngo-description" rows="4" cols="50" required></textarea><br><br>
     
+    <label for="ngo-image-url">NGO Image URL:</label><br>
+    <input type="text" id="ngo-image-url" class="card"><br><br>
+
     <button type="submit">Create Card</button>
   </form>
 

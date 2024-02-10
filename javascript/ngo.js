@@ -30,6 +30,18 @@ document.addEventListener("DOMContentLoaded", function () {
       const cardDescription = document.createElement("p");
       cardDescription.textContent = ngoCard.description;
 
+      const editButton = document.createElement('button')
+      editButton.textContent= 'Edit'
+      editButton.addEventListener('click',function(event){
+        const updatedName = prompt("Enter updated name:", ngoCard.name);
+              const updatedDescription = prompt("Enter updated description:", ngoCard.description);
+              ngoCard.name = updatedName;
+              ngoCard.description = updatedDescription;
+              localStorage.setItem("ngoCards", JSON.stringify(ngoCards));
+
+              renderCards();
+      });
+
       const deleteButton = document.createElement("button");
       deleteButton.textContent = "Delete";
       deleteButton.addEventListener("click", function () {

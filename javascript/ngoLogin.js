@@ -22,5 +22,5 @@ myForm.addEventListener('submit', function (event) {
   localStorage.setItem('NGO', JSON.stringify(NGOs));
   localStorage.setItem('isNGOLoggedIn', 'YES');
   localStorage.setItem('isUserLoggedIn', 'NO');
-  window.location.href = '/Charity.html'
+  window.location.href = '/ngo.html'
 })
