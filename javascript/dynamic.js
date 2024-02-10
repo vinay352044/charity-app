@@ -80,6 +80,7 @@ const ngoSignupBtn = document.getElementById('ngoSignupBtn');
 const ngoLogoutBtn = document.getElementById('ngoLogout')
 const adminLoginBtn = document.getElementById('adminLoginBtn')
 const adminPageBtn = document.getElementById('adminPageBtn')
+const ngoPageBtn = document.getElementById('ngoPageBtn')
 
 if(localStorage.getItem('isUserLoggedIn') === 'YES') {
   userLogin.style.display = 'none'
@@ -112,7 +113,12 @@ else {
   adminLoginBtn.style.display = 'block';
   adminPageBtn.style.display = 'none';
 }
-
+if(localStorage.getItem('isNGOLoggedIn')==='YES'){
+ ngoPageBtn.style.display = 'block'
+}
+else{
+  ngoPageBtn.style.display = 'none'
+}
 
 userLogout.addEventListener('click', function () {
   localStorage.setItem('isUserLoggedIn', 'NO');
