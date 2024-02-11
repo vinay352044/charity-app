@@ -30,12 +30,28 @@
     <button type="submit">Create Card</button>
   </form>
 
+  
+
   <!-- Container to display existing NGO cards -->
   <h2>Existing NGO Cards</h2>
   <div id="ngo-cards-container">
     <!-- NGO cards will be dynamically added here -->
   </div>
+  <h2>Add User</h2>
+  
+  <form id="user-form">
+    <label for="username">Username:</label>
+    <input type="text" id="username" required><br><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" required><br><br>
 
+    <button type="submit">Add User</button>
+  </form>
+  <h2>Existing Users</h2>
+  <div id="user-container">
+    <!-- User cards will be dynamically added here -->
+  </div>
   <script src="./javascript/admin.js"></script>
 </body>
 </html>
