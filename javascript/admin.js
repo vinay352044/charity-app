@@ -1,3 +1,7 @@
+if(localStorage.getItem('isAdminLoggedIn') === 'NO') {
+  window.location.href = '/Charity.html'
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   const ngoForm = document.getElementById("ngo-form");
   const ngoCardsContainer = document.getElementById("ngo-cards-container");
