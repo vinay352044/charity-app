@@ -1,154 +1,90 @@
 document.addEventListener("DOMContentLoaded", function () {
-  let ngoCards = JSON.parse(localStorage.getItem("ngoCards")) || [];
-  const ngoCardsContainer = document.getElementById("ngo-cards-container");
-  const sortingOptions = document.getElementById("sorting");
+  const ngoCards = JSON.parse(localStorage.getItem("ngoCards")) || [];
+  const container = document.getElementById("ngo-cards-container");
+  container.innerHTML = "";
 
-  function sortAndDisplayCards(order) {
-    ngoCardsContainer.innerHTML = "";
-    if (order === "asc") {
-      ngoCards.sort((a, b) => a.amount - b.amount);
-    } else if (order === "desc") {
-      ngoCards.sort((a, b) => b.amount - a.amount);
-    }
-
-    // Pagination logic starts here
-    const container = ngoCardsContainer;
-    let currentPage = 1;
-    const cardsPerPage = 6;
-
-    function renderCards(startIndex, endIndex) {
-      container.innerHTML = "";
-      const currentData = ngoCards.slice(startIndex, endIndex);
-      currentData.forEach((ngoCard) => {
-        // Rendering logic remains the same
-        // Replace ngoCard with ngo if there's any conflict with variable names
-        const cardColumn = document.createElement("div");
-        // Remaining rendering logic goes here...
-      });
-    }
-
-    function loadMore() {
-      const startIndex = (currentPage - 1) * cardsPerPage;
-      const endIndex = currentPage * cardsPerPage;
-
-      renderCards(startIndex, endIndex);
-      currentPage++;
-
-      if ((currentPage - 1) * cardsPerPage >= ngoCards.length) {
-        loadMoreButton.style.display = "none";
-      }
-    }
-
-    renderCards(0, cardsPerPage); // Initial rendering
-    // Pagination logic ends here
-
-    sortingOptions.addEventListener("change", function () {
-      const selectedOrder = sortingOptions.value;
-      sortAndDisplayCards(selectedOrder);
-    });
-  }
-
-  sortAndDisplayCards("asc"); // initially displaying cards in ascending order
-
-  // Handling user login/logout visibility
-  const userLogin = document.getElementById("userLogin");
-  const userSignup = document.getElementById("userSignup");
-  const userLogout = document.getElementById("userLogout");
-  const ngoLoginBtn = document.getElementById("ngoLoginBtn");
-  const ngoSignupBtn = document.getElementById("ngoSignupBtn");
-  const ngoLogoutBtn = document.getElementById("ngoLogout");
-  const adminLoginBtn = document.getElementById("adminLoginBtn");
-  const adminPageBtn = document.getElementById("adminPageBtn");
-  const ngoPageBtn = document.getElementById("ngoPageBtn");
-
-  // User authentication logic remains the same...
-
-  userLogout.addEventListener("click", function () {
-    localStorage.setItem("isUserLoggedIn", "NO");
-    localStorage.setItem("isAdminLoggedIn", "NO");
-    window.location.reload();
-  });
-
-  ngoLogoutBtn.addEventListener("click", function () {
-    localStorage.setItem("isNGOLoggedIn", "NO");
-    localStorage.setItem("isAdminLoggedIn", "NO");
-    window.location.reload();
-  });
-
-  // Pagination related logic
-
-  const paginationContainer = document.getElementById("paginationContainer");
-  const loadMoreButton = document.getElementById("loadMoreButton");
-
-  let currentPage = 1;
   const cardsPerPage = 6;
-  let data = [];
+  let currentPage = 1;
 
-  function renderCards(startIndex, endIndex) {
-    const currentData = data.slice(startIndex, endIndex);
-    currentData.forEach((ngo) => {
-      const ngoDiv = document.createElement("div");
-      ngoDiv.classList.add("ngo");
+  function renderNgoCards(startIndex, endIndex) {
+    for (let i = startIndex; i < endIndex; i++) {
+      if (ngoCards[i]) {
+        const ngoCard = ngoCards[i];
+        const cardColumn = document.createElement("div");
+        cardColumn.classList.add("col-md-6");
 
-      const imageUrl = ngo.image_url || "https://via.placeholder.com/400x300";
+        const cardDiv = document.createElement("div");
+        cardDiv.classList.add("card");
+        cardDiv.style.width = "100%";
 
-      ngoDiv.innerHTML = `
-                <img src="${imageUrl}" alt="${ngo.name}">
-                <h3>${ngo.name}</h3>
-                <p>${ngo.description}</p>
-                <p>Available balance: $ ${ngo.available_balance}</p>
-            `;
+        const cardImage = document.createElement("img");
+        cardImage.classList.add("card-img-top");
+        cardImage.src = ngoCard.imageUrl;
+        cardImage.alt = "NGO Image";
 
-      const donateButton = document.createElement("button");
-      donateButton.textContent = "Donate Now";
-      donateButton.classList.add("donate");
-      donateButton.style.backgroundColor = "#4CAF50";
-      donateButton.style.color = "white";
-      donateButton.style.padding = "10px 20px";
-      donateButton.style.fontSize = "16px";
-      donateButton.style.border = "none";
-      donateButton.style.borderRadius = "5px";
+        const cardBody = document.createElement("div");
+        cardBody.classList.add("card-body");
 
-      // donateButton.addEventListener('click', () => {
-      //     if (!isLoggedIn) {
-      //         alert('Please login first to donate.');
-      //     } else {
-      //         window.location.href = 'donationPage.html';
-      //     }
-      // });
+        const cardTitle = document.createElement("h5");
+        cardTitle.classList.add("card-title");
+        cardTitle.textContent = ngoCard.name;
 
-      ngoDiv.appendChild(donateButton);
-      container.appendChild(ngoDiv);
-    });
+        const cardText = document.createElement("p");
+        cardText.classList.add("card-text");
+        cardText.textContent = ngoCard.description;
+
+        const cardBtn = document.createElement("button");
+        cardBtn.textContent = "Donate";
+
+        cardBtn.addEventListener("click", function () {
+          let amount = prompt("Enter the amount");
+          amount = parseInt(amount);
+          if (Number.isNaN(amount)) {
+            alert("Please enter a valid amount");
+            return;
+          }
+          ngoCards[i].amount += amount;
+          localStorage.setItem("ngoCards", JSON.stringify(ngoCards));
+          window.location.reload();
+        });
+
+        const amountText = document.createElement("p");
+        amountText.textContent =
+          "Total donation : " + JSON.stringify(ngoCard.amount);
+
+        cardBody.appendChild
+        cardDiv.appendChild(cardBtn);
+
+        cardColumn.appendChild(cardDiv);
+        container.appendChild(cardColumn);
+      }(cardTitle);
+        cardBody.appendChild(cardText);
+        cardDiv.appendChild(cardImage);
+        cardDiv.appendChild(cardBody);
+        cardDiv.appendChild(amountText);
+    }
   }
 
   function loadMore() {
-    const startIndex = (currentPage - 1) * cardsPerPage;
-    const endIndex = currentPage * cardsPerPage;
-
-    renderCards(startIndex, endIndex);
+    const startIndex = currentPage * cardsPerPage;
+    const endIndex = (currentPage + 1) * cardsPerPage;
+    renderNgoCards(startIndex, endIndex);
     currentPage++;
-
-    if ((currentPage - 1) * cardsPerPage >= data.length) {
-      loadMoreButton.style.display = "none";
-    }
   }
 
-  fetch("ngo_data.json")
-    .then((response) => response.json())
-    .then((jsonData) => {
-      data = jsonData;
+  renderNgoCards(0, cardsPerPage);
 
-      // Initially load first page of cards
-      loadMore();
+  const loadMoreButton = document.getElementById("loadMoreButton");
+  if (ngoCards.length > cardsPerPage) {
+    loadMoreButton.style.display = "block";
+  } else {
+    loadMoreButton.style.display = "none";
+  }
 
-      if (currentPage * cardsPerPage < data.length) {
-        loadMoreButton.style.display = "block";
-      }
-
-      loadMoreButton.addEventListener("click", loadMore);
-    })
-    .catch((error) => {
-      console.error("Error fetching data:", error);
-    });
+  loadMoreButton.addEventListener("click", function () {
+    loadMore();
+    if ((currentPage + 1) * cardsPerPage >= ngoCards.length) {
+      loadMoreButton.style.display = "none";
+    }
+  });
 });

@@ -1,7 +1,7 @@
 const myForm = document.getElementById("userSignupForm");
 
 myForm.addEventListener("submit", function (event) {
-  event.preventDefault();
+  event.preventDefault();  // to prevent page from reloading after submitting the form
   const userName = document.getElementById("username").value;
   const passWord = document.getElementById("password").value;
 
