@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NGO Data</title>
+  <link rel="stylesheet" href="css/styles.css">
+  
+</head>
+
+<body>
+    <!-- navbar with signup button and search -->
+    <div class="navbar">
+        <div class="nav-links">
+            <button>Admin Login</button>
+            <button>Sign Up</button>
+        </div>
+        <form id="search-input" >
+        <div class="search-bar">
+            <input type="text" placeholder="Search..." id="search-form">
+            <button onclick="searchNgo()">Search</button>
+        </div>
+    </form>
+    </div>
+  <div class="container" id="ngoContainer">
+    <!-- NGOs will be inserted here dynamically -->
+  </div>
+  <script src="/javascript/indexPageScript.js"></script>
+  <script src="/javascript/search.js"></script>
+
+</body>
+</html>
