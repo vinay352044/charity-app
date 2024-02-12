@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <style>
+    .navbar-brand {
+      margin-right: auto;
+    }
+    .charity-page {
+      text-align: center;
+    }
+    .card {
+      margin-bottom: 20px;
+    }
+
+    img{
+        height: 300px;
+        width: 300px;
+    }
+    .card img{
+      max-width: 100%; 
+      max-height: 200px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Admin Panel</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item" id="adminPageBtn">
+            <a class="nav-link" href="crud_user.html">CRUD User</a>
+          </li>
+          <li class="nav-item" id="adminLoginBtn">
+            <a class="nav-link" href="crud_ngo.html">CRUD NGO</a>
+          </li>
+          <select id="sorting">
+          <option value="asc">Sort by total donations (Asc)</option>
+          <option value="desc">Sort by total donations (Desc)</option>
+          </select>
+
+          
+        </ul>
+        
+      </div>
+    </div>
+  </nav>
+  <!-- Form to add NGO cards -->
+  <h2>Add NGO Card</h2>
+  <form id="ngo-form">
+    <label for="ngo-name">NGO Name:</label>
+    <input type="text" id="ngo-name" required><br><br>
+    
+    <label for="ngo-description">NGO Description:</label><br>
+    <textarea id="ngo-description" rows="4" cols="50" required></textarea><br><br>
+    
+    <label for="ngo-image-url">NGO Image URL:</label><br>
+    <input type="text" id="ngo-image-url" class="card"><br><br>
+
+    <button type="submit">Create Card</button>
+  </form>
+
+  <!-- This container is displaying existing ngo cards from our local storage-->
+  <h2>Existing NGO Cards</h2>
+  <div id="ngo-cards-container">
+    
+  </div>
+  <h2>Add User</h2>
+
+  <form id="user-form">
+    <label for="username">Username:</label>
+    <input type="text" id="username" required><br><br>
+    
+    <label for="password">Password:</label>
+    <input type="password" id="password" required><br><br>
+
+    <button type="submit">Add User</button>
+  </form>
+  <h2>Existing Users</h2>
+  <div id="user-container">
+    <!-- User cards will be dynamically added here -->
+  </div>
+
+  <h2>Add NGO</h2>
+<form id="ngo-add-form">
+  <label for="ngo-name">NGO Name:</label>
+  <input type="text" id="ngo-name" required><br><br>
+  
+  <label for="ngo-username">NGO Username:</label><br>
+  <input type="text" id="ngo-username" required><br><br>
+
+  <label for="ngo-password">NGO Password:</label><br>
+  <input type="password" id="ngo-password" required><br><br>
+
+  <button type="submit">Add NGO</button>
+</form>
+
+<h2>Existing NGOs</h2>
+<div id="ngo-container">
+  <!-- NGO cards will be dynamically added here -->
+</div>
+
+  <script src="./javascript/admin.js"></script>
+</body>
+</html>

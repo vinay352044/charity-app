@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NGO Page</title>
+</head>
+<body>
+  <style>
+    .card img{
+      max-width: 100%; 
+      max-height: 200px;
+      object-fit: cover;
+    }
+  </style>
+  <h1>NGO Page</h1>
+
+  <!-- Form to add NGO cards -->
+  <h2>Add new NGO card</h2>
+  <form id="ngo-form">
+    <label for="ngo-name">NGO Name:</label>
+    <input type="text" id="ngo-name" required><br><br>
+    
+    <label for="ngo-description">NGO Description:</label><br>
+    <textarea id="ngo-description" rows="4" cols="50" required></textarea><br><br>
+
+    <label for="ngo-image-url">NGO Image URL:</label><br>
+    <input type="text" id="ngo-image-url" class="card"><br><br>
+    
+    <button type="submit">Create Card</button>
+  </form>
+
+  <!-- Container to display existing NGO cards -->
+  <h2>Your NGO Cards</h2>
+  <div id="ngo-cards-container">
+    <!-- NGO cards will be dynamically added here -->
+  </div>
+
+  <script src="./javascript/ngo.js"></script>
+</body>
+</html>
