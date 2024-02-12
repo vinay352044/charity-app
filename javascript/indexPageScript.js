@@ -1,52 +1,50 @@
-var isLoggedIn=false;
-let ngoData=[];
+// var isLoggedIn=false;
+// let ngoData=[];
 const container = document.getElementById("ngoContainer");
 container.innerHTML = ''; 
 
-function renderNgoCards(ngoData) {
-  // Clearing existing content in container
-  // container.innerHTML = '';
+// function renderNgoCards(ngoData) {
+//   // Clearing existing content in container
+//   // container.innerHTML = '';
 
-  ngoData.forEach(ngo => {
-      const ngoDiv = document.createElement('div');
-      ngoDiv.classList.add('ngo');
-      ngoDiv.innerHTML = `
-          <img src="${ngo.image_url}" alt="${ngo.name}">
-          <h3>${ngo.name}</h3>
-          <p>${ngo.description}</p>
-          <p>Available balance: $${ngo.available_balance}</p>
-      `;
-      const donateButton=document.createElement('button');
-        donateButton.classList.add='donate'
-        donateButton.innerHTML='donate now'
-        donateButton.style.backgroundColor = '#4CAF50'; 
-        donateButton.style.color = 'white'; 
-        donateButton.style.padding = '10px 20px'; 
-        donateButton.style.fontSize = '16px'; 
-        donateButton.style.border = 'none'; 
-        donateButton.style.borderRadius = '5px'; 
-        donateButton.style.cursor='pointer';
+//   ngoData.forEach(ngo => {
+//       const ngoDiv = document.createElement('div');
+//       ngoDiv.classList.add('ngo');
+//       ngoDiv.innerHTML = `
+//           <img src="${ngo.image_url}" alt="${ngo.name}">
+//           <h3>${ngo.name}</h3>
+//           <p>${ngo.description}</p>
+//           <p>Available balance: $${ngo.available_balance}</p>
+//       `;
+//       const donateButton=document.createElement('button');
+//         donateButton.classList.add='donate'
+//         donateButton.innerHTML='donate now'
+//         donateButton.style.backgroundColor = '#4CAF50'; 
+//         donateButton.style.color = 'white'; 
+//         donateButton.style.padding = '10px 20px'; 
+//         donateButton.style.fontSize = '16px'; 
+//         donateButton.style.border = 'none'; 
+//         donateButton.style.borderRadius = '5px'; 
+//         donateButton.style.cursor='pointer';
         
-        donateButton.addEventListener('click',()=>
-        {console.log('button clicked')
-          if(!isLoggedIn)
-          alert('please login first to donate')
+//         donateButton.addEventListener('click',()=>
+//         {console.log('button clicked')
+//           if(!isLoggedIn)
+//           alert('please login first to donate')
       
-          else window.location.href='donationPage.html'}    
-)
+//           else window.location.href='donationPage.html'}    
+// )
          
       
-        ngoDiv.appendChild(donateButton)
-      container.appendChild(ngoDiv);
-  });
-}
+//         ngoDiv.appendChild(donateButton)
+//       container.appendChild(ngoDiv);
+//   });
+// }
 
 let data = []; 
 document.addEventListener("DOMContentLoaded", function () {
-    // const container = document.getElementById("ngoContainer");
     const paginationContainer = document.getElementById("paginationContainer");
     const loadMoreButton = document.getElementById("loadMoreButton");
-  
     let currentPage = 1;
     const cardsPerPage = 6;
   
@@ -76,13 +74,13 @@ document.addEventListener("DOMContentLoaded", function () {
             donateButton.style.border = 'none'; 
             donateButton.style.borderRadius = '5px';
   
-            donateButton.addEventListener('click', () => {
-                if (!isLoggedIn) {
-                    alert('Please login first to donate.');
-                } else {
-                    window.location.href = 'donationPage.html';
-                }
-            });
+            // donateButton.addEventListener('click', () => {
+            //     if (!isLoggedIn) {
+            //         alert('Please login first to donate.');
+            //     } else {
+            //         window.location.href = 'donationPage.html';
+            //     }
+            // });
   
             ngoDiv.appendChild(donateButton);
             container.appendChild(ngoDiv);
@@ -92,12 +90,12 @@ document.addEventListener("DOMContentLoaded", function () {
     function loadMore() {
         const startIndex = (currentPage - 1) * cardsPerPage;
         const endIndex = currentPage * cardsPerPage;
-  
+
         renderCards(startIndex, endIndex);
         currentPage++;
   
       
-        if (currentPage * cardsPerPage >= data.length) {
+        if ((currentPage-1) * cardsPerPage >= data.length) {
             loadMoreButton.style.display = 'none';
         }
     }
@@ -122,33 +120,8 @@ document.addEventListener("DOMContentLoaded", function () {
         });
   });
 
-  function sortNgoCards(order) {
-    console.log('running');
-    fetch('ngo_data.json')
-      .then(response => response.json())
-      .then(jsonData => {
-          // Store the fetched data
-          data = jsonData;
+//***********************************************************************/
 
-          // Initially load first page of cards
-        
-          // Show the "Load More" button if there are more cards to load
-          
-          
-          // Add event listener to the "Load More" button
-        
-            if (order === 'asc') {
-                data.sort((a, b) => a.available_balance - b.available_balance);
-            } else if (order === 'desc') {
-                data.sort((a, b) => b.available_balance - a.available_balance);
-            }
-            console.log(data);
-            renderNgoCards(data); // Re-render sorted data
-      })
-      .catch(error => {
-          console.error('Error fetching data:', error);
-      });
-}
 
 
 
